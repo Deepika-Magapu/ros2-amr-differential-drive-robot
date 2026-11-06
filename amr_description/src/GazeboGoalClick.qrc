@@ -1,0 +1,9 @@
+<RCC>
+  <qresource prefix="/libGazeboGoalClick.so">
+    <file alias="libGazeboGoalClick.so.qml">GazeboGoalClick.qml</file>
+  </qresource>
+  <qresource prefix="/GazeboGoalClick">
+    <file alias="GazeboGoalClick.qml">GazeboGoalClick.qml</file>
+    <file>GazeboGoalClick.qml</file>
+  </qresource>
+</RCC>
