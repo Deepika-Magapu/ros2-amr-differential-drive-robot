@@ -137,19 +137,18 @@ Additional ROS 2 dependencies may be required depending on the selected launch c
 
 ## 8. Building the ROS 2 Workspace
 
-### Step 1: Clone the repository
-
-```bash
-git clone <YOUR_GITHUB_REPOSITORY_URL>
-```
-
-### Step 2: Create a ROS 2 workspace
+### Step 1: Create a ROS 2 workspace
 
 ```bash
 mkdir -p ~/ros2_ws/src
+cd ~/ros2_ws/src
 ```
 
-Place or clone the repository into the workspace's `src` directory.
+### Step 2: Clone the repository
+
+```bash
+git clone https://github.com/Deepika-Magapu/ros2-amr-differential-drive-robot.git
+```
 
 ### Step 3: Install dependencies
 
@@ -173,19 +172,61 @@ colcon build --symlink-install
 source install/setup.bash
 ```
 
-## 9. Simulation and Navigation
+The ROS 2 workspace is now ready to use.
 
-The repository includes robot description files, launch configurations, Gazebo worlds, RViz configurations and saved maps.
+## 9. Simulation and Autonomous Navigation
 
-These resources support the development and testing of:
+The repository includes the robot description files, launch configurations, Gazebo simulation resources, RViz configurations, saved maps and navigation-related packages required to simulate and test the Autonomous Mobile Robot (AMR).
 
-1. Robot model visualization.
-2. Differential-drive motion simulation.
-3. Sensor integration and visualization.
-4. Environment mapping using SLAM Toolbox.
-5. Autonomous navigation using Nav2.
+The project supports the following functionalities:
 
-Refer to the launch files and configuration files in `amr_description` for the available configurations.
+1. **Robot Model Visualization:** Visualizing the differential-drive AMR model in Gazebo and RViz.
+2. **Differential-Drive Motion:** Simulating forward, reverse, turning and rotational movements.
+3. **Sensor Integration:** Integrating and visualizing sensor data, including LiDAR scans.
+4. **Environment Mapping:** Generating environment maps using SLAM Toolbox.
+5. **Saved-Map Navigation:** Loading previously generated maps for autonomous navigation.
+6. **Autonomous Navigation:** Using the ROS 2 Navigation Stack (Nav2) for goal-directed robot movement and obstacle avoidance.
+
+### Launching the Simulation
+
+Open three separate terminals and execute the following commands in the same order.
+
+**Terminal 1: Launch Gazebo Simulation**
+
+```bash
+cd ~/ros2_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_LOCALHOST_ONLY=1
+
+ros2 launch amr_description gazebo.launch.py
+```
+
+**Terminal 2: Launch Saved-Map Navigation Stack**
+
+```bash
+cd ~/ros2_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_LOCALHOST_ONLY=1
+
+ros2 launch amr_description saved_map_nav_stack.launch.py
+```
+
+**Terminal 3: Launch RViz Navigation Interface**
+
+```bash
+cd ~/ros2_ws
+source /opt/ros/humble/setup.bash
+source install/setup.bash
+export ROS_LOCALHOST_ONLY=1
+
+ros2 launch amr_description rviz_navigation.launch.py
+```
+
+Once all three components are running, the robot can be observed in the Gazebo environment and its navigation information can be monitored through RViz.
+
+**Note:** The above launch sequence uses the saved-map navigation configuration. The repository also contains separate launch files for mapping and other simulation configurations. Refer to the `amr_description/launch` directory for the available launch files.
 
 ## 10. Future Improvements
 
